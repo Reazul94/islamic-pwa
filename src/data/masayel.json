@@ -1,0 +1,16 @@
+[
+  {
+    "id": 1,
+    "question": "What breaks the Wudu (Ablution)?",
+    "bn_question": "ওযু ভঙ্গের কারণসমূহ কী কী?",
+    "answer": "1. Discharge of urine, feces, or gas.\n2. Deep sleep.\n3. Loss of consciousness.\n4. Direct touch of private parts without a barrier (according to some Madhhabs).\n5. Flow of blood/pus from the body (according to Hanafi).",
+    "bn_answer": "১. প্রস্রাব বা পায়খানার রাস্তা দিয়ে কোনো কিছু বের হওয়া।\n২. বাতাস নির্গত হওয়া।\n৩. কাত হয়ে বা হেলান দিয়ে ঘুমিয়ে পড়া।\n৪. অজ্ঞান বা পাগল হওয়া।\n৫. শরীর থেকে রক্ত বা পুঁজ বের হয়ে গড়িয়ে পড়া।"
+  },
+  {
+    "id": 2,
+    "question": "Is business investment halal?",
+    "bn_question": "ব্যবসায়িক বিনিয়োগ কি হালাল?",
+    "answer": "Yes, investing in businesses is halal provided the business does not deal in prohibited (Haraam) sectors like alcohol, gambling, interest-based banking, pork, etc., and the contract follows profit-loss sharing principles instead of fixed-interest returns.",
+    "bn_answer": "হ্যাঁ, ব্যবসায় বিনিয়োগ করা হালাল যদি সংশ্লিষ্ট ব্যবসাটি মদ, জুয়া, সুদভিত্তিক ব্যাংকিং, শুকর ইত্যাদি হারাম বিষয়ে লিপ্ত না থাকে এবং চুক্তিটি নির্দিষ্ট মুনাফার পরিবর্তে লাভ-লোকসান ভাগাভাগির নীতির ওপর ভিত্তি করে তৈরি হয়।"
+  }
+]

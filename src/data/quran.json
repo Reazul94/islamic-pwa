@@ -1,0 +1,154 @@
+[
+  {
+    "id": 1,
+    "name": "Al-Fatihah",
+    "arabic": "الفاتحة",
+    "translation": "The Opening",
+    "bengali": "আল-ফাতিহা",
+    "verses_count": 7,
+    "type": "Meccan",
+    "verses": [
+      {
+        "number": 1,
+        "ar": "بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ",
+        "en": "In the name of Allah, the Entirely Merciful, the Especially Merciful.",
+        "bn": "পরম করুণাময় অসীম দয়ালু আল্লাহর নামে শুরু করছি।"
+      },
+      {
+        "number": 2,
+        "ar": "الْحَمْدُ لِلَّهِ رَبِّ الْعَالَمِينَ",
+        "en": "[All] praise is [due] to Allah, Lord of the worlds -",
+        "bn": "সব প্রশংসা সারা জাহানের প্রতিপালক আল্লাহরই জন্য।"
+      },
+      {
+        "number": 3,
+        "ar": "الرَّحْمَٰنِ الرَّحِيمِ",
+        "en": "The Entirely Merciful, the Especially Merciful,",
+        "bn": "যিনি পরম করুণাময় ও অসীম দয়ালু।"
+      },
+      {
+        "number": 4,
+        "ar": "مَالِكِ يَوْمِ الدِّينِ",
+        "en": "Sovereign of the Day of Recompense.",
+        "bn": "যিনি বিচার দিনের মালিক।"
+      },
+      {
+        "number": 5,
+        "ar": "إِيَّاكَ نَعْبُدُ وَإِيَّاكَ نَسْتَعِينُ",
+        "en": "It is You we worship and You we ask for help.",
+        "bn": "আমরা কেবল আপনারই ইবাদত করি এবং কেবল আপনারই সাহায্য চাই।"
+      },
+      {
+        "number": 6,
+        "ar": "اهْدِنَا الصِّرَاطَ الْمُسْتَقِيمَ",
+        "en": "Guide us to the straight path -",
+        "bn": "আমাদের সরল পথ দেখান।"
+      },
+      {
+        "number": 7,
+        "ar": "صِرَاطَ الَّذِينَ أَنْعَمْتَ عَلَيْهِمْ غَيْرِ الْمَغْضُوبِ عَلَيْهِمْ وَلَا الضَّالِّينَ",
+        "en": "The path of those upon whom You have bestowed favor, not of those who have evoked [Your] anger or of those who are astray.",
+        "bn": "তাদের পথ, যাদের আপনি নেয়ামত দিয়েছেন; তাদের পথ নয় যারা আপনার গজবের শিকার হয়েছে এবং যারা পথভ্রষ্ট হয়েছে।"
+      }
+    ]
+  },
+  {
+    "id": 36,
+    "name": "Ya-Sin",
+    "arabic": "يس",
+    "translation": "Ya-Sin",
+    "bengali": "ইয়াসীন",
+    "verses_count": 83,
+    "type": "Meccan",
+    "verses": [
+      {
+        "number": 1,
+        "ar": "يس",
+        "en": "Ya, Seen.",
+        "bn": "ইয়া-সীন।"
+      },
+      {
+        "number": 2,
+        "ar": "وَالْقُرْآنِ الْحَكِيمِ",
+        "en": "By the wise Qur'an,",
+        "bn": "প্রজ্ঞাময় কুরআনের শপথ,"
+      },
+      {
+        "number": 3,
+        "ar": "إِنَّكَ لَمِنَ الْمُرْسَلِينَ",
+        "en": "Indeed you, [O Muhammad], are of the messengers,",
+        "bn": "নিশ্চয়ই আপনি রাসূলদের অন্তর্ভুক্ত,"
+      },
+      {
+        "number": 4,
+        "ar": "عَلَىٰ صِرَاطٍ مُسْتَقِيمٍ",
+        "en": "On a straight path.",
+        "bn": "সরল পথের ওপর প্রতিষ্ঠিত।"
+      },
+      {
+        "number": 5,
+        "ar": "تَنزِيلَ الْعَزِيزِ الرَّحِيمِ",
+        "en": "[This is] a revelation of the Exalted in Might, the Merciful,",
+        "bn": "এই কুরআন পরাক্রমশালী পরম দয়ালু আল্লাহ কর্তৃক অবতীর্ণ,"
+      }
+    ]
+  },
+  {
+    "id": 67,
+    "name": "Al-Mulk",
+    "arabic": "الملك",
+    "translation": "The Sovereignty",
+    "bengali": "আল-মূলক",
+    "verses_count": 30,
+    "type": "Meccan",
+    "verses": [
+      {
+        "number": 1,
+        "ar": "تَبَارَكَ الَّذِي بِيَدِهِ الْمُلْكُ وَهُوَ عَلَىٰ كُلِّ شَيْءٍ قَدِيرٌ",
+        "en": "Blessed is He in whose hand is dominion, and He is over all things competent -",
+        "bn": "পরম বরকতময় তিনি, যাঁর হাতে রয়েছে রাজত্ব; আর তিনি সব কিছুর ওপর পূর্ণ ক্ষমতাবান।"
+      },
+      {
+        "number": 2,
+        "ar": "الَّذِي خَلَقَ الْمَوْتَ وَالْحَيَاةَ لِيَبْلُوَكُمْ أَيُّكُمْ أَحْسَنُ عَمَلًا ۚ وَهُوَ الْعَزِيزُ الْغَفُورُ",
+        "en": "[He] who created death and life to test you [as to] which of you is best in deed - and He is the Exalted in Might, the Forgiving -",
+        "bn": "যিনি সৃষ্টি করেছেন মৃত্যু ও জীবন, যাতে তোমাদের পরীক্ষা করে দেখতে পারেন যে কাজে তোমাদের মধ্যে কে সবচেয়ে ভালো? আর তিনি পরাক্রমশালী, অতি ক্ষমাশীল।"
+      }
+    ]
+  },
+  {
+    "id": 112,
+    "name": "Al-Ikhlas",
+    "arabic": "الإخلاص",
+    "translation": "Sincerity",
+    "bengali": "আল-ইখলাস",
+    "verses_count": 4,
+    "type": "Meccan",
+    "verses": [
+      {
+        "number": 1,
+        "ar": "قُلْ هُوَ اللَّهُ أَحَدٌ",
+        "en": "Say, \"He is Allah, [who is] One,",
+        "bn": "বলুন, তিনিই আল্লাহ, এক-অদ্বিতীয়।"
+      },
+      {
+        "number": 2,
+        "ar": "اللَّهُ الصَّمَدُ",
+        "en": "Allah, the Eternal Refuge.",
+        "bn": "আল্লাহ মুখাপেক্ষীহীন (সবাই তাঁর মুখাপেক্ষী)।"
+      },
+      {
+        "number": 3,
+        "ar": "لَمْ يَلِدْ وَلَمْ يُولَدْ",
+        "en": "He neither begets nor is born,",
+        "bn": "তিনি কাউকে জন্ম দেননি এবং তাঁকেও জন্ম দেওয়া হয়নি।"
+      },
+      {
+        "number": 4,
+        "ar": "وَلَمْ يَكُن لَّهُ كُفُوًا أَحَدٌ",
+        "en": "Nor is there to Him any equivalent.\"",
+        "bn": "এবং তাঁর সমকক্ষ কেউ নেই।"
+      }
+    ]
+  }
+]

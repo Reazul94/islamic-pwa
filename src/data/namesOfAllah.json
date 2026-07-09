@@ -1,0 +1,11 @@
+[
+  { "id": 1, "ar": "الرَّحْمَن", "bn_trans": "আর-রহমান", "en": "The Beneficent / All-Merciful", "bn": "পরম দয়ালু" },
+  { "id": 2, "ar": "الرَّحِيم", "bn_trans": "আর-রাহীম", "en": "The Merciful / Especially Merciful", "bn": "অতিশয় মেহেরবান" },
+  { "id": 3, "ar": "الْمَلِك", "bn_trans": "আল-মালিক", "en": "The King / Sovereign", "bn": "সর্বকর্তৃত্বময় রাজাধিরাজ" },
+  { "id": 4, "ar": "الْقُدُّوس", "bn_trans": "আল-কুদ্দুস", "en": "The Pure / Holy", "bn": "অতি পবিত্র" },
+  { "id": 5, "ar": "السَّلَام", "bn_trans": "আস-সালাম", "en": "The Giver of Peace", "bn": "শান্তি ও নিরাপত্তা দানকারী" },
+  { "id": 6, "ar": "الْمُؤْمِن", "bn_trans": "আল-মু'মিন", "en": "The Giver of Belief", "bn": "ঈমান ও নিরাপত্তা দানকারী" },
+  { "id": 7, "ar": "الْمُهَيْمِن", "bn_trans": "আল-মুহাইমিন", "en": "The Guardian / Overseer", "bn": "রক্ষাকর্তা ও অভিভাবক" },
+  { "id": 8, "ar": "الْعَزِيز", "bn_trans": "আল-আযীয", "en": "The All-Mighty", "bn": "পরাক্রমশালী ও মহাসম্মানিত" },
+  { "id": 9, "ar": "الْجَبَّار", "bn_trans": "আল-জাব্বার", "en": "The Compeller / Restorer", "bn": "মহাপ্রতাপশালী" }
+]

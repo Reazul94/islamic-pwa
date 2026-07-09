@@ -1,0 +1,32 @@
+[
+  {
+    "id": 1,
+    "book": "Sahih Al-Bukhari",
+    "chapter": "Revelation",
+    "isnaad": "Narrated 'Alqama bin Waqqas Al-Laithi:",
+    "bengali_isnaad": "আলকামা ইবনু ওয়াক্কাস আল-লাইসী (রহঃ) থেকে বর্ণিত:",
+    "matn_ar": "سَمِعْتُ عُمَرَ بْنَ الْخَطَّابِ رَضِيَ اللَّهُ عَنْهُ عَلَى الْمِنْبَرِ قَالَ سَمِعْتُ رَسُولَ اللَّهِ صَلَّى اللَّهُ عَلَيْهِ وَسَلَّمَ يَقُولُ إِنَّمَا الْأَعْمَالُ بِالنِّيَّاتِ وَإِنَّمَا لِكُلِّ امْرِئٍ مَا نَوَى",
+    "matn_en": "I heard Umar bin Al-Khattab delivering a sermon on the pulpit, saying, 'I heard Allah's Messenger saying: \"The reward of deeds depends upon the intentions and every person will get the reward according to what he has intended.\"'",
+    "matn_bn": "আমি উমর ইবনুল খাত্তাব (রাঃ)-কে মিম্বরের ওপর দাঁড়িয়ে বলতে শুনেছি, আমি রাসূলুল্লাহ (সাল্লাল্লাহু আলাইহি ওয়া সাল্লাম)-কে বলতে শুনেছিঃ \"নিয়তের ওপরই সমস্ত কাজের ফলাফল নির্ভর করে এবং প্রত্যেক ব্যক্তি তার নিয়ত অনুযায়ীই প্রতিফল পাবে।\""
+  },
+  {
+    "id": 2,
+    "book": "Sahih Muslim",
+    "chapter": "Faith (Iman)",
+    "isnaad": "It is narrated on the authority of Yahya b. Ya'mur:",
+    "bengali_isnaad": "ইয়াহইয়া ইবনু ইয়া’মুর (রহঃ) থেকে বর্ণিত:",
+    "matn_ar": "قَالَ حَدَّثَنِي أَبِي عُمَرُ بْنُ الْخَطَّابِ قَالَ بَيْنَمَا نَحْنُ عِنْدَ رَسُولِ اللَّهِ صَلَّى اللَّهُ عَلَيْهِ وَسَلَّمَ ذَاتَ يَوْمٍ إِذْ طَلَعَ عَلَيْنَا رَجُلٌ شَدِيدُ بَيَاضِ الثِّيَابِ شَدِيدُ سَوَادِ الشَّعَرِ",
+    "matn_en": "My father Umar ibn al-Khattab told me: One day while we were sitting with the Messenger of Allah, there appeared before us a man whose clothes were exceedingly white and whose hair was exceedingly black...",
+    "matn_bn": "আমার পিতা উমার ইবনুল খাত্তাব (রাঃ) আমার কাছে বর্ণনা করেছেনঃ একদিন আমরা রাসূলুল্লাহ (সাল্লাল্লাহু আলাইহি ওয়া সাল্লাম)-এর দরবারে বসা ছিলাম। এমন সময় এক ব্যক্তি আমাদের সামনে উপস্থিত হলেন, যার পরিধেয় বস্ত্র ছিল ধবধবে সাদা এবং চুল ছিল কুচকুচে কালো..."
+  },
+  {
+    "id": 3,
+    "book": "Sunan Abi Dawud",
+    "chapter": "General Behavior",
+    "isnaad": "Narrated Abu Hurayrah:",
+    "bengali_isnaad": "আবু হুরায়রা (রাঃ) থেকে বর্ণিত:",
+    "matn_ar": "إِنَّمَا بُعِثْتُ لأُتَمِّمَ صَالِحَ الأَخْلاَقِ",
+    "matn_en": "The Prophet (ﷺ) said: 'I was sent only to perfect good character.'",
+    "matn_bn": "রাসূলুল্লাহ (সাল্লাল্লাহু আলাইহি ওয়া সাল্লাম) বলেছেনঃ \"আমি কেবল উত্তম চরিত্রের পূর্ণতা সাধনের জন্যই প্রেরিত হয়েছি।\""
+  }
+]

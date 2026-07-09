@@ -1,0 +1,35 @@
+[
+  {
+    "id": 1,
+    "category": "Morning & Evening",
+    "title": "Supplication when waking up",
+    "bn_title": "ঘুম থেকে ওঠার পর পড়ার দুআ",
+    "ar": "الْحَمْدُ للهِ الَّذِي أَحْيَانَا بَعْدَ مَا أَمَاتَنَا وَإِلَيْهِ النُّشُورُ",
+    "bn_trans": "আলহামদু লিল্লাহিল্লাযী আহ ইয়ানা বা'দা মা আমাতানা ওয়া ইলাইহিন নুশূর।",
+    "bn_mean": "সব প্রশংসা আল্লাহর জন্য, যিনি মৃত্যুর (ঘুমের) পর আমাদের জীবিত করলেন এবং তাঁর দিকেই আমাদের ফিরে যেতে হবে।",
+    "en_mean": "All praise is due to Allah who gave us life after giving us death (sleep) and unto Him is the resurrection.",
+    "ref": "Sahih Al-Bukhari"
+  },
+  {
+    "id": 2,
+    "category": "Morning & Evening",
+    "title": "Sayyidul Istighfar (Master of Forgiveness)",
+    "bn_title": "সাইয়্যিদুল ইস্তিগফার (ক্ষমা প্রার্থনার শ্রেষ্ঠ দুআ)",
+    "ar": "اللَّهُمَّ أَنْتَ رَبِّي لَا إِلَهَ إِلَّا أَنْتَ خَلَقْتَنِي وَأَنَا عَبْدُكَ وَأَنَا عَلَى عَهْدِكَ وَوَعْدِكَ مَا اسْتَطَعْتُ أَعُوذُ بِكَ مِنْ شَرِّ مَا صَنَعْتُ أَبُوءُ لَكَ بِنِعْمَتِكَ عَلَيَّ وَأَبُوءُ لَكَ بِذَنْبِي فَاغْفِرْ لِي فَإِنَّهُ لَا يَغْفِرُ الذُّنُوبَ إِلَّا أَنْتَ",
+    "bn_trans": "আল্লাহুম্মা আন্তা রব্বী লা ইলাহা ইল্লা আন্তা খলা ক্তানী ওয়া আনা আবদুকা ওয়া আনা আলা আহদিকা ওয়া ওয়া’দিকা মাসতাত’তু, আউযুবিকা মিন শাররি মা সনা’তু, আবূউ লাকা বিনি’মাতিকা আলাইয়্যা ওয়া আবূউ বিযান্বী ফাগফিরলী ফাইন্নাহু লা ইয়াগফিরুয যুনূবা ইল্লা আন্তা।",
+    "bn_mean": "হে আল্লাহ! আপনি আমার রব, আপনি ছাড়া কোনো ইলাহ নেই। আপনি আমাকে সৃষ্টি করেছেন এবং আমি আপনার বান্দা। আমি আমার সাধ্যমতো আপনার দেওয়া অঙ্গীকার ও প্রতিশ্রুতির ওপর কায়েম আছি। আমি আমার কৃতকর্মের অনিষ্টতা থেকে আপনার নিকট আশ্রয় চাচ্ছি। আমার ওপর আপনার দেওয়া নিয়ামতের কথা স্বীকার করছি এবং স্বীকার করছি আমার গুনাহের কথা। অতএব আপনি আমাকে ক্ষমা করে দিন, কেননা আপনি ছাড়া গুনাহ ক্ষমা করার আর কেউ নেই।",
+    "en_mean": "O Allah! You are my Lord. There is no god except You. You created me and I am Your slave. I keep my covenant and my promise to You as much as I can. I seek refuge in You from the evil of what I have done. I acknowledge Your grace upon me and I acknowledge my sin. Therefore, forgive me, for indeed, none can forgive sins except You.",
+    "ref": "Sahih Al-Bukhari"
+  },
+  {
+    "id": 3,
+    "category": "Home & Travel",
+    "title": "Dua before entering the home",
+    "bn_title": "ঘরে প্রবেশ করার সময় পড়ার দুআ",
+    "ar": "بِسْمِ اللَّهِ وَلَجْنَا، وَبِسْمِ اللَّهِ خَرَجْنَا، وَعَلَى اللَّهِ رَبِّنَا تَوَكَّلْنَا",
+    "bn_trans": "বিসমিল্লাহি ওয়ালাজনা, ওয়া বিসমিল্লাহি খরাজনা, ওয়া আলাল্লাহি রব্বিনা তাওয়াক্কালনা।",
+    "bn_mean": "আল্লাহর নামে আমরা প্রবেশ করলাম, আল্লাহর নামে আমরা বের হলাম এবং আমাদের প্রতিপালক আল্লাহর ওপরই ভরসা করলাম।",
+    "en_mean": "In the name of Allah we enter, and in the name of Allah we leave, and upon our Lord we place our trust.",
+    "ref": "Sunan Abi Dawud"
+  }
+]
