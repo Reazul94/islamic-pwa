@@ -1,9 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { ArrowLeft, CheckCircle2, HandMetal, Moon, Navigation, Plus, RotateCcw, Search } from 'lucide-react';
 import duasData from '../data/duas.json';
 
 const AmalTab = () => {
   const [activeView, setActiveView] = useState('grid'); // grid, tracker, tasbih, duas, mushaf
+  const scrollRef = useRef(null);
   
   // TASBIH STATE
   const [tasbihCount, setTasbihCount] = useState(0);
@@ -85,7 +86,7 @@ const AmalTab = () => {
     ];
 
     return (
-      <div className="p-4 pb-24 animate-fade-in">
+      <div ref={scrollRef} className="p-4 pb-24 animate-fade-in scroll-mt-2">
         <button 
           onClick={() => setActiveView('grid')} 
           className="flex items-center gap-1.5 text-xs font-semibold text-islamic-600 dark:text-islamic-400 mb-4 bg-slate-100 dark:bg-slate-800 px-3 py-1.5 rounded-full"
@@ -168,7 +169,7 @@ const AmalTab = () => {
 
   const renderTasbih = () => {
     return (
-      <div className="p-4 pb-24 animate-fade-in">
+      <div ref={scrollRef} className="p-4 pb-24 animate-fade-in scroll-mt-2">
         <button 
           onClick={() => setActiveView('grid')} 
           className="flex items-center gap-1.5 text-xs font-semibold text-islamic-600 dark:text-islamic-400 mb-4 bg-slate-100 dark:bg-slate-800 px-3 py-1.5 rounded-full"
@@ -218,7 +219,7 @@ const AmalTab = () => {
   // 3. HISNUL MUSLIM LOGIC
   const renderHisnulMuslim = () => {
     return (
-      <div className="p-4 pb-24 animate-fade-in">
+      <div ref={scrollRef} className="p-4 pb-24 animate-fade-in scroll-mt-2">
         <button 
           onClick={() => setActiveView('grid')} 
           className="flex items-center gap-1.5 text-xs font-semibold text-islamic-600 dark:text-islamic-400 mb-4 bg-slate-100 dark:bg-slate-800 px-3 py-1.5 rounded-full"
@@ -272,7 +273,7 @@ const AmalTab = () => {
   // 4. MUSHAF QURAN PAGE SIMULATOR
   const renderMushaf = () => {
     return (
-      <div className="p-4 pb-24 animate-fade-in">
+      <div ref={scrollRef} className="p-4 pb-24 animate-fade-in scroll-mt-2">
         <button 
           onClick={() => setActiveView('grid')} 
           className="flex items-center gap-1.5 text-xs font-semibold text-islamic-600 dark:text-islamic-400 mb-4 bg-slate-100 dark:bg-slate-800 px-3 py-1.5 rounded-full"
@@ -318,7 +319,14 @@ const AmalTab = () => {
             return (
               <div 
                 key={item.id} 
-                onClick={() => setActiveView(item.id)}
+                onClick={() => {
+                  setActiveView(item.id);
+                  setTimeout(() => {
+                    if (scrollRef.current) {
+                      scrollRef.current.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    }
+                  }, 100);
+                }}
                 className="bg-white dark:bg-slate-800 p-4 rounded-3xl shadow-sm border border-slate-100 dark:border-slate-700/80 flex flex-col items-center justify-center text-center hover:shadow-md cursor-pointer hover:border-islamic-200 dark:hover:border-slate-600 transition-all duration-300 group"
               >
                 <div className="w-12 h-12 bg-islamic-50 dark:bg-slate-700 text-islamic-600 dark:text-islamic-400 rounded-2xl flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">

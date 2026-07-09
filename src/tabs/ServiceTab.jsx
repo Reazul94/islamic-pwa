@@ -1,9 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { ArrowLeft, Calculator, Briefcase, FileText, Users, HelpCircle, Heart, Search } from 'lucide-react';
 import masayelData from '../data/masayel.json';
 
 const ServiceTab = () => {
   const [activeView, setActiveView] = useState('grid'); // grid, zakat, masayel, biniyog, matrimony
+  const scrollRef = useRef(null);
   
   // ZAKAT CALCULATOR STATE
   const [cash, setCash] = useState(0);
@@ -54,7 +55,7 @@ const ServiceTab = () => {
   // 1. RENDER ZAKAT CALCULATOR
   const renderZakatCalculator = () => {
     return (
-      <div className="p-4 pb-24 animate-fade-in">
+      <div ref={scrollRef} className="p-4 pb-24 animate-fade-in scroll-mt-2">
         <button 
           onClick={() => setActiveView('grid')} 
           className="flex items-center gap-1.5 text-xs font-semibold text-islamic-600 dark:text-islamic-400 mb-4 bg-slate-100 dark:bg-slate-800 px-3 py-1.5 rounded-full"
@@ -228,7 +229,7 @@ const ServiceTab = () => {
 
   // 3. RENDER HALAL FINANCE INFO
   const renderBiniyog = () => (
-    <div className="p-4 pb-24 animate-fade-in">
+    <div ref={scrollRef} className="p-4 pb-24 animate-fade-in scroll-mt-2">
       <button onClick={() => setActiveView('grid')} className="flex items-center gap-1.5 text-xs font-semibold text-islamic-600 mb-4 bg-slate-100 px-3 py-1.5 rounded-full"><ArrowLeft size={14} /> Back</button>
       <h3 className="text-lg font-bold mb-3">Halal Investment Principles</h3>
       <div className="bg-white dark:bg-slate-800 p-5 rounded-2xl border border-slate-100 dark:border-slate-700 shadow-sm space-y-4 text-xs leading-relaxed text-slate-600 dark:text-slate-300">
@@ -250,7 +251,7 @@ const ServiceTab = () => {
 
   // 4. RENDER MATRIMONY
   const renderMatrimony = () => (
-    <div className="p-4 pb-24 animate-fade-in">
+    <div ref={scrollRef} className="p-4 pb-24 animate-fade-in scroll-mt-2">
       <button onClick={() => setActiveView('grid')} className="flex items-center gap-1.5 text-xs font-semibold text-islamic-600 mb-4 bg-slate-100 px-3 py-1.5 rounded-full"><ArrowLeft size={14} /> Back</button>
       <h3 className="text-lg font-bold mb-3">Halal Matrimony</h3>
       <div className="bg-white dark:bg-slate-800 p-5 rounded-2xl border border-slate-100 dark:border-slate-700 shadow-sm text-center py-8">
@@ -275,7 +276,14 @@ const ServiceTab = () => {
             return (
               <div 
                 key={item.id} 
-                onClick={() => setActiveView(item.id)}
+                onClick={() => {
+                  setActiveView(item.id);
+                  setTimeout(() => {
+                    if (scrollRef.current) {
+                      scrollRef.current.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    }
+                  }, 100);
+                }}
                 className="bg-white dark:bg-slate-800 p-4 rounded-3xl shadow-sm border border-slate-100 dark:border-slate-700/80 flex flex-col items-center justify-center text-center hover:shadow-md cursor-pointer hover:border-islamic-200 dark:hover:border-slate-600 transition-all duration-300 group"
               >
                 <div className="w-12 h-12 bg-islamic-50 dark:bg-slate-700 text-islamic-600 dark:text-islamic-400 rounded-2xl flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">

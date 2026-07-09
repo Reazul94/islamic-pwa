@@ -157,21 +157,18 @@ const Header = () => {
           <h3 className="text-xs uppercase tracking-wider font-bold text-islamic-100 mb-2">Configure Settings</h3>
           
           {/* Madhhab setting */}
-          <div className="flex items-center justify-between mb-3 pb-2 border-b border-white/10">
-            <span className="text-xs">Madhhab (Asr computation):</span>
-            <div className="flex bg-white/10 p-0.5 rounded-lg text-xs">
-              <button 
-                onClick={() => setMadhhab('standard')} 
-                className={`px-3 py-1 rounded-md transition-all ${madhhab === 'standard' ? 'bg-islamic-600 font-bold' : ''}`}
-              >
-                Standard
-              </button>
-              <button 
-                onClick={() => setMadhhab('hanafi')} 
-                className={`px-3 py-1 rounded-md transition-all ${madhhab === 'hanafi' ? 'bg-islamic-600 font-bold' : ''}`}
-              >
-                Hanafi
-              </button>
+          <div className="flex flex-col gap-1.5 mb-3 pb-2 border-b border-white/10">
+            <span className="text-xs">Madhhab (Calculation School):</span>
+            <div className="grid grid-cols-5 gap-1 bg-white/10 p-0.5 rounded-lg text-[10px]">
+              {['shafi', 'hanafi', 'maliki', 'hanbali', 'jafari'].map((m) => (
+                <button 
+                  key={m}
+                  onClick={() => setMadhhab(m)} 
+                  className={`py-1.5 rounded transition-all capitalize font-bold ${madhhab === m ? 'bg-islamic-600 text-white shadow-sm' : 'text-islamic-100 hover:bg-white/5'}`}
+                >
+                  {m}
+                </button>
+              ))}
             </div>
           </div>
 
@@ -245,6 +242,8 @@ const Header = () => {
                 strokeWidth="2.5" 
               />
             )}
+            {/* Center tick for Dhuhr */}
+            <line x1="50" y1="26" x2="50" y2="34" stroke="rgba(255, 255, 255, 0.4)" strokeWidth="1.5" />
             {/* Glow / gradient definitions */}
             <defs>
               <linearGradient id="sunGradient" x1="0%" y1="0%" x2="100%" y2="0%">
@@ -263,6 +262,7 @@ const Header = () => {
           
           <div className="flex justify-between items-center text-[10px] opacity-75 font-semibold mt-1">
             <span>Fajr {prayerTimes ? format(prayerTimes.fajr, 'hh:mm a') : '04:10 AM'}</span>
+            <span className="text-yellow-300">Dhuhr {prayerTimes ? format(prayerTimes.dhuhr, 'hh:mm a') : '12:05 PM'}</span>
             <span>Maghrib {prayerTimes ? format(prayerTimes.maghrib, 'hh:mm a') : '06:45 PM'}</span>
           </div>
         </div>

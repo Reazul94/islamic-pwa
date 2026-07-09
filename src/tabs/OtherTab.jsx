@@ -1,10 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { ArrowLeft, Compass, Map, Heart, Calendar, Play, Pause } from 'lucide-react';
 import namesData from '../data/namesOfAllah.json';
 import { useSettingsStore } from '../store/settingsStore';
 
 const OtherTab = () => {
   const [activeView, setActiveView] = useState('grid'); // grid, qibla, mosque, names, calendar
+  const scrollRef = useRef(null);
   const { coordinates } = useSettingsStore();
 
   // COMPASS STATE
@@ -58,7 +59,7 @@ const OtherTab = () => {
     const kaabaRotation = qiblaDir - heading;
 
     return (
-      <div className="p-4 pb-24 animate-fade-in text-center">
+      <div ref={scrollRef} className="p-4 pb-24 animate-fade-in text-center scroll-mt-2">
         <button 
           onClick={() => setActiveView('grid')} 
           className="flex items-center gap-1.5 text-xs font-semibold text-islamic-600 dark:text-islamic-400 mb-6 bg-slate-100 dark:bg-slate-800 px-3 py-1.5 rounded-full"
@@ -113,7 +114,7 @@ const OtherTab = () => {
   // 2. MOSQUE LOCATOR
   const renderMosqueLocator = () => {
     return (
-      <div className="p-4 pb-24 animate-fade-in text-center">
+      <div ref={scrollRef} className="p-4 pb-24 animate-fade-in text-center scroll-mt-2">
         <button 
           onClick={() => setActiveView('grid')} 
           className="flex items-center gap-1.5 text-xs font-semibold text-islamic-600 dark:text-islamic-400 mb-4 bg-slate-100 dark:bg-slate-800 px-3 py-1.5 rounded-full"
@@ -157,7 +158,7 @@ const OtherTab = () => {
 
   const renderNamesOfAllah = () => {
     return (
-      <div className="p-4 pb-24 animate-fade-in">
+      <div ref={scrollRef} className="p-4 pb-24 animate-fade-in scroll-mt-2">
         <button 
           onClick={() => setActiveView('grid')} 
           className="flex items-center gap-1.5 text-xs font-semibold text-islamic-600 dark:text-islamic-400 mb-4 bg-slate-100 dark:bg-slate-800 px-3 py-1.5 rounded-full"
@@ -208,7 +209,7 @@ const OtherTab = () => {
     ];
 
     return (
-      <div className="p-4 pb-24 animate-fade-in">
+      <div ref={scrollRef} className="p-4 pb-24 animate-fade-in scroll-mt-2">
         <button 
           onClick={() => setActiveView('grid')} 
           className="flex items-center gap-1.5 text-xs font-semibold text-islamic-600 dark:text-islamic-400 mb-4 bg-slate-100 dark:bg-slate-800 px-3 py-1.5 rounded-full"
@@ -248,7 +249,14 @@ const OtherTab = () => {
             return (
               <div 
                 key={item.id} 
-                onClick={() => setActiveView(item.id)}
+                onClick={() => {
+                  setActiveView(item.id);
+                  setTimeout(() => {
+                    if (scrollRef.current) {
+                      scrollRef.current.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    }
+                  }, 100);
+                }}
                 className="bg-white dark:bg-slate-800 p-4 rounded-3xl shadow-sm border border-slate-100 dark:border-slate-700/80 flex flex-col items-center justify-center text-center hover:shadow-md cursor-pointer hover:border-islamic-200 dark:hover:border-slate-600 transition-all duration-300 group"
               >
                 <div className="w-12 h-12 bg-islamic-50 dark:bg-slate-700 text-islamic-600 dark:text-islamic-400 rounded-2xl flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
