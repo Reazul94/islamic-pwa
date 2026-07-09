@@ -2,17 +2,125 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  /* Default Light Theme */
+  --bg-primary: #ffffff;
+  --bg-secondary: #f8fafc;
+  --text-primary: #0f172a;
+  --text-secondary: #64748b;
+  --card-bg: #ffffff;
+  --card-border: #f1f5f9;
+  --primary: #059669;
+  --primary-hover: #047857;
+  --primary-light: #ecfdf5;
+}
+
+/* Theme Classes */
+.theme-light {
+  --bg-primary: #ffffff;
+  --bg-secondary: #f8fafc;
+  --text-primary: #0f172a;
+  --text-secondary: #64748b;
+  --card-bg: #ffffff;
+  --card-border: #f1f5f9;
+  --primary: #059669;
+  --primary-hover: #047857;
+  --primary-light: #ecfdf5;
+}
+
+.theme-dark {
+  --bg-primary: #0f172a;
+  --bg-secondary: #020617;
+  --text-primary: #f8fafc;
+  --text-secondary: #94a3b8;
+  --card-bg: #1e293b;
+  --card-border: #334155;
+  --primary: #10b981;
+  --primary-hover: #059669;
+  --primary-light: #064e3b;
+}
+
+.theme-mint {
+  --bg-primary: #f0fdf4;
+  --bg-secondary: #dcfce7;
+  --text-primary: #14532d;
+  --text-secondary: #166534;
+  --card-bg: #ffffff;
+  --card-border: #bbf7d0;
+  --primary: #15803d;
+  --primary-hover: #166534;
+  --primary-light: #f0fdf4;
+}
+
+.theme-solarized {
+  --bg-primary: #fdf6e3;
+  --bg-secondary: #eee8d5;
+  --text-primary: #073642;
+  --text-secondary: #586e75;
+  --card-bg: #fdf6e3;
+  --card-border: #93a1a1;
+  --primary: #b58900;
+  --primary-hover: #cb4b16;
+  --primary-light: #eee8d5;
+}
+
+.theme-dracula {
+  --bg-primary: #282a36;
+  --bg-secondary: #1e1f29;
+  --text-primary: #f8f8f2;
+  --text-secondary: #6272a4;
+  --card-bg: #44475a;
+  --card-border: #6272a4;
+  --primary: #bd93f9;
+  --primary-hover: #ff79c6;
+  --primary-light: #1e1f29;
+}
+
+.theme-onedark {
+  --bg-primary: #282c34;
+  --bg-secondary: #21252b;
+  --text-primary: #abb2bf;
+  --text-secondary: #5c6370;
+  --card-bg: #21252b;
+  --card-border: #3e4452;
+  --primary: #98c379;
+  --primary-hover: #61afef;
+  --primary-light: #282c34;
+}
+
+.theme-nord {
+  --bg-primary: #2e3440;
+  --bg-secondary: #242933;
+  --text-primary: #d8dee9;
+  --text-secondary: #4c566a;
+  --card-bg: #3b4252;
+  --card-border: #4c566a;
+  --primary: #88c0d0;
+  --primary-hover: #81a1c1;
+  --primary-light: #2e3440;
+}
+
 @layer base {
   body {
-    @apply bg-white text-slate-900 transition-colors duration-300;
-  }
-  
-  .dark body {
-    @apply bg-slate-900 text-slate-50;
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+    transition: background-color 0.3s, color 0.3s;
   }
 }
 
-/* Custom Scrollbar for better UX */
+/* Global utility bindings to use variables dynamically */
+.bg-theme-bg { background-color: var(--bg-primary); }
+.bg-theme-secondary { background-color: var(--bg-secondary); }
+.text-theme-text { color: var(--text-primary); }
+.text-theme-secondary { color: var(--text-secondary); }
+.bg-theme-card { background-color: var(--card-bg); }
+.border-theme-border { border-color: var(--card-border); }
+.text-theme-primary { color: var(--primary); }
+.bg-theme-primary { background-color: var(--primary); }
+.bg-theme-primary-hover:hover { background-color: var(--primary-hover); }
+.bg-theme-primary-light { background-color: var(--primary-light); }
+
+/* Custom Scrollbar */
 ::-webkit-scrollbar {
   width: 6px;
   height: 6px;
@@ -21,5 +129,15 @@
   background: transparent;
 }
 ::-webkit-scrollbar-thumb {
-  @apply bg-slate-300 dark:bg-slate-700 rounded-full;
+  background-color: var(--card-border);
+  border-radius: 9999px;
+}
+
+/* Animations */
+@keyframes marquee {
+  0% { transform: translateX(100%); }
+  100% { transform: translateX(-100%); }
+}
+.animate-marquee {
+  animation: marquee 25s linear infinite;
 }

@@ -11,7 +11,7 @@ const BottomNav = ({ activeTab, setActiveTab }) => {
   ];
 
   return (
-    <div className="fixed bottom-0 left-0 right-0 max-w-2xl mx-auto w-full bg-white dark:bg-slate-900 border-t border-slate-200 dark:border-slate-800 pb-safe z-50">
+    <div className="fixed bottom-0 left-0 right-0 max-w-2xl mx-auto w-full bg-theme-card border-t border-theme-border pb-safe z-50 transition-colors duration-300">
       <div className="flex justify-around items-center h-16">
         {tabs.map((tab) => {
           const Icon = tab.icon;
@@ -22,10 +22,10 @@ const BottomNav = ({ activeTab, setActiveTab }) => {
               onClick={() => setActiveTab(tab.id)}
               className={clsx(
                 "flex flex-col items-center justify-center w-full h-full space-y-1 transition-colors duration-200",
-                isActive ? "text-islamic-600 dark:text-islamic-400" : "text-slate-500 hover:text-slate-900 dark:hover:text-slate-300"
+                isActive ? "text-theme-primary font-bold" : "text-theme-secondary hover:text-theme-text"
               )}
             >
-              <Icon className={clsx("w-6 h-6", isActive && "animate-bounce")} strokeWidth={isActive ? 2.5 : 2} />
+              <Icon className={clsx("w-6 h-6", isActive && "scale-105")} strokeWidth={isActive ? 2.5 : 2} />
               <span className="text-[10px] font-medium">{tab.label}</span>
             </button>
           );

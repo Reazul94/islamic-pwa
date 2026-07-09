@@ -1,0 +1,7 @@
+- `[x]` Refactor layouts and update components
+  - `[x]` Update `App.jsx` to render all tabs vertically on one page with scroll observers
+  - `[x]` Update `BottomNav.jsx` to scroll on click
+  - `[x]` Update `Header.jsx` with Dhuhr start time on sun curve and 5 Madhhabs
+  - `[x]` Update `IlmTab.jsx` with Quran/Hadith API, Dexie offline caching, and reciter selection audio player
+  - `[x]` Implement auto-scroll to details on grid click across tabs
+  - `[x]` Verify local build and deploy to GitHub Pages

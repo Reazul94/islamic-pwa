@@ -1,206 +1,180 @@
-import React, { useState, useEffect, useRef } from 'react';
-import { ArrowLeft, Compass, Map, Heart, Calendar, Play, Pause } from 'lucide-react';
-import namesData from '../data/namesOfAllah.json';
+import React, { useState, useRef, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { Compass, Map, Heart, Calendar, ArrowLeft, Download, Database, RefreshCw, BookOpen } from 'lucide-react';
 import { useSettingsStore } from '../store/settingsStore';
 
 const OtherTab = () => {
-  const [activeView, setActiveView] = useState('grid'); // grid, qibla, mosque, names, calendar
-  const scrollRef = useRef(null);
+  const navigate = useNavigate();
   const { coordinates } = useSettingsStore();
-
-  // COMPASS STATE
-  const [heading, setHeading] = useState(0);
-  const [qiblaDir, setQiblaDir] = useState(0);
-
-  const menuItems = [
-    { id: 'qibla', title: 'Qibla Compass', icon: Compass, desc: 'Live compass using orientation sensors' },
-    { id: 'mosque', title: 'Mosque Locator', icon: Map, desc: 'Find nearest mosque using maps' },
-    { id: 'names', title: 'Names of Allah', icon: Heart, desc: '99 names with meanings and benefits' },
-    { id: 'calendar', title: 'Islamic Calendar', icon: Calendar, desc: 'Countdown to Ramadan, Eid, and Ashura' }
-  ];
-
-  // 1. QIBLA COMPASS LOGIC
-  // Kaaba Coordinates: Lat 21.4225° N, Lng 39.8262° E
-  const calculateQiblaDirection = (lat, lng) => {
-    const kLat = 21.4225 * Math.PI / 180;
-    const kLng = 39.8262 * Math.PI / 180;
-    const uLat = lat * Math.PI / 180;
-    const uLng = lng * Math.PI / 180;
-
-    const y = Math.sin(kLng - uLng);
-    const x = Math.cos(uLat) * Math.tan(kLat) - Math.sin(uLat) * Math.cos(kLng - uLng);
-    
-    let qiblaRad = Math.atan2(y, x);
-    let qiblaDeg = qiblaRad * 180 / Math.PI;
-    if (qiblaDeg < 0) qiblaDeg += 360;
-    
-    return qiblaDeg;
-  };
+  const [activeView, setActiveView] = useState('grid'); // grid, calendar, mosque
+  const readerRef = useRef(null);
+  
+  // PWA Install state
+  const [deferredPrompt, setDeferredPrompt] = useState(null);
+  const [isInstallable, setIsInstallable] = useState(false);
 
   useEffect(() => {
-    if (activeView === 'qibla') {
-      const qDir = calculateQiblaDirection(coordinates.latitude, coordinates.longitude);
-      setQiblaDir(qDir);
+    const handleBeforeInstall = (e) => {
+      e.preventDefault();
+      setDeferredPrompt(e);
+      setIsInstallable(true);
+    };
 
-      const handleOrientation = (e) => {
-        // alpha corresponds to rotation around z-axis
-        if (e.alpha !== null) {
-          setHeading(360 - e.alpha);
-        }
-      };
+    window.addEventListener('beforeinstallprompt', handleBeforeInstall);
+    return () => window.removeEventListener('beforeinstallprompt', handleBeforeInstall);
+  }, []);
 
-      window.addEventListener('deviceorientation', handleOrientation, true);
-      return () => window.removeEventListener('deviceorientation', handleOrientation);
+  const handleInstallApp = async () => {
+    if (!deferredPrompt) return;
+    deferredPrompt.prompt();
+    const { outcome } = await deferredPrompt.userChoice;
+    if (outcome === 'accepted') {
+      setIsInstallable(false);
+      setDeferredPrompt(null);
     }
-  }, [activeView, coordinates]);
-
-  const renderQiblaCompass = () => {
-    // Rotation of Kaaba pointer relative to device heading
-    const kaabaRotation = qiblaDir - heading;
-
-    return (
-      <div ref={scrollRef} className="p-4 pb-24 animate-fade-in text-center scroll-mt-2">
-        <button 
-          onClick={() => setActiveView('grid')} 
-          className="flex items-center gap-1.5 text-xs font-semibold text-islamic-600 dark:text-islamic-400 mb-6 bg-slate-100 dark:bg-slate-800 px-3 py-1.5 rounded-full"
-        >
-          <ArrowLeft size={14} /> Back
-        </button>
-
-        <div className="bg-white dark:bg-slate-800 rounded-3xl border border-slate-100 dark:border-slate-700 p-6 shadow-sm flex flex-col items-center">
-          <h3 className="font-bold text-base text-slate-800 dark:text-slate-100 mb-2">Qibla Compass</h3>
-          <p className="text-xs text-slate-400 max-w-xs mb-8">
-            Qibla is at <span className="font-bold text-islamic-600">{qiblaDir.toFixed(1)}°</span> from North. Align your device until the Kaaba needle points straight up.
-          </p>
-
-          {/* Compass Dial UI */}
-          <div className="w-56 h-56 rounded-full border-4 border-slate-200 dark:border-slate-700 relative flex items-center justify-center shadow-lg bg-slate-50 dark:bg-slate-900 select-none">
-            {/* Compass Card Rotating */}
-            <div 
-              style={{ transform: `rotate(${-heading}deg)` }}
-              className="absolute inset-2 rounded-full border border-dashed border-slate-350 dark:border-slate-800 flex items-center justify-center transition-transform duration-200"
-            >
-              <span className="absolute top-1 text-xs font-bold text-red-500">N</span>
-              <span className="absolute right-1 text-xs font-bold text-slate-400">E</span>
-              <span className="absolute bottom-1 text-xs font-bold text-slate-400">S</span>
-              <span className="absolute left-1 text-xs font-bold text-slate-400">W</span>
-            </div>
-
-            {/* Kaaba Needle Rotating */}
-            <div 
-              style={{ transform: `rotate(${kaabaRotation}deg)` }}
-              className="absolute w-2 h-44 flex flex-col justify-between items-center transition-transform duration-100"
-            >
-              {/* Pointer to Kaaba */}
-              <div className="w-0 h-0 border-l-[8px] border-l-transparent border-r-[8px] border-r-transparent border-b-[20px] border-b-islamic-600 filter drop-shadow"></div>
-              {/* Counter balance */}
-              <div className="w-2 h-8 bg-slate-300 dark:bg-slate-600 rounded-full"></div>
-            </div>
-            
-            {/* Center Pin */}
-            <div className="w-5 h-5 bg-white dark:bg-slate-850 rounded-full border-2 border-slate-400 z-10 flex items-center justify-center font-bold text-[8px]">
-              🕋
-            </div>
-          </div>
-          
-          <div className="mt-8 text-xs text-slate-400 font-medium">
-            Device Heading: {heading.toFixed(0)}°
-          </div>
-        </div>
-      </div>
-    );
   };
 
-  // 2. MOSQUE LOCATOR
-  const renderMosqueLocator = () => {
-    return (
-      <div ref={scrollRef} className="p-4 pb-24 animate-fade-in text-center scroll-mt-2">
-        <button 
-          onClick={() => setActiveView('grid')} 
-          className="flex items-center gap-1.5 text-xs font-semibold text-islamic-600 dark:text-islamic-400 mb-4 bg-slate-100 dark:bg-slate-800 px-3 py-1.5 rounded-full"
-        >
-          <ArrowLeft size={14} /> Back
-        </button>
+  // Database Backup/Restore Actions
+  const handleExportData = () => {
+    const data = {
+      salatTracker: localStorage.getItem('salatTracker') || '{}',
+      settings: localStorage.getItem('islamic-settings') || '{}',
+      bookmarks: localStorage.getItem('bookmarks') || '[]',
+      timestamp: new Date().toISOString()
+    };
+    const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement('a');
+    link.href = url;
+    link.download = `islamic-pwa-backup-${new Date().toLocaleDateString()}.json`;
+    link.click();
+  };
 
-        <div className="bg-white dark:bg-slate-800 rounded-3xl border border-slate-100 dark:border-slate-700 p-6 shadow-sm flex flex-col items-center">
-          <Map size={32} className="text-islamic-600 mb-3" />
-          <h3 className="font-bold text-base mb-2">Find Nearby Mosques</h3>
-          <p className="text-xs text-slate-400 max-w-xs mb-6">
-            Search for local mosques using offline mapping or deep-link direction maps.
-          </p>
+  const handleImportData = (e) => {
+    const file = e.target.files[0];
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = (event) => {
+      try {
+        const imported = JSON.parse(event.target.result);
+        if (imported.salatTracker) localStorage.setItem('salatTracker', imported.salatTracker);
+        if (imported.settings) localStorage.setItem('islamic-settings', imported.settings);
+        if (imported.bookmarks) localStorage.setItem('bookmarks', imported.bookmarks);
+        alert("Data imported successfully! Reloading page...");
+        window.location.reload();
+      } catch (err) {
+        alert("Invalid backup file format.");
+      }
+    };
+    reader.readAsText(file);
+  };
 
-          <a 
-            href={`https://www.google.com/maps/search/mosque+near+me/@${coordinates.latitude},${coordinates.longitude},15z`}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="w-full py-3 bg-islamic-600 hover:bg-islamic-500 text-white rounded-2xl text-xs font-bold shadow-md transition-all active:scale-95 flex items-center justify-center gap-1.5"
+  const handleResetCache = () => {
+    if (confirm("Are you sure you want to clear all prayer logs, settings, and cached Quran recitations?")) {
+      localStorage.clear();
+      alert("Local cache cleared successfully! Re-initializing...");
+      window.location.reload();
+    }
+  };
+
+  const menuItems = [
+    { id: 'qibla', title: 'Qibla Compass', icon: Compass, desc: 'Live compass using orientation sensors', action: () => navigate('/compass') },
+    { id: 'names', title: 'Names of Allah', icon: Heart, desc: '99 names with meanings and benefits', action: () => navigate('/names') },
+    { id: 'calendar', title: 'Islamic Calendar', icon: Calendar, desc: 'Countdown to Ramadan, Eid, and Ashura', action: () => { setActiveView('calendar'); scrollDetail(); } },
+    { id: 'mosque', title: 'Mosque Locator', icon: Map, desc: 'Find nearest mosque using maps', action: () => { setActiveView('mosque'); scrollDetail(); } }
+  ];
+
+  const scrollDetail = () => {
+    setTimeout(() => {
+      if (readerRef.current) {
+        readerRef.current.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    }, 100);
+  };
+
+  const renderGrid = () => (
+    <div className="p-4 space-y-6 animate-fade-in">
+      <div>
+        <h2 className="text-xl font-bold text-theme-text mb-4">Other Tools & Settings</h2>
+        <div className="grid grid-cols-2 gap-4">
+          {menuItems.map((item) => {
+            const Icon = item.icon;
+            return (
+              <div 
+                key={item.id} 
+                onClick={item.action}
+                className="bg-theme-card p-4 rounded-3xl shadow-sm border border-theme-border flex flex-col items-center justify-center text-center hover:shadow-md cursor-pointer hover:border-theme-primary transition-all duration-300 group"
+              >
+                <div className="w-12 h-12 bg-theme-primary-light text-theme-primary rounded-2xl flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
+                  <Icon size={24} />
+                </div>
+                <h3 className="font-bold text-sm text-theme-text">{item.title}</h3>
+                <p className="text-[10px] text-theme-secondary mt-1 leading-snug">{item.desc}</p>
+              </div>
+            );
+          })}
+        </div>
+      </div>
+
+      {/* PWA INSTALL CARD */}
+      {isInstallable && (
+        <div className="bg-gradient-to-r from-theme-primary to-theme-primary-hover text-white p-5 rounded-3xl shadow-md flex items-center justify-between">
+          <div>
+            <h3 className="font-bold text-sm">Download App</h3>
+            <p className="text-[10px] opacity-90 mt-0.5">Install Islamic PWA directly onto your home screen.</p>
+          </div>
+          <button 
+            onClick={handleInstallApp}
+            className="flex items-center gap-1 bg-white text-theme-primary font-bold px-4 py-2.5 rounded-xl text-xs active:scale-95 transition-transform"
           >
-            Open in Google Maps
-          </a>
+            <Download size={14} /> Install PWA
+          </button>
+        </div>
+      )}
+
+      {/* DATABASE MANAGEMENT UTILITIES */}
+      <div className="bg-theme-card p-5 rounded-3xl border border-theme-border shadow-sm space-y-4">
+        <h3 className="font-extrabold text-sm text-theme-text flex items-center gap-2">
+          <Database size={18} className="text-theme-primary" />
+          ডাটাবেজ ব্যবস্থাপনা ও ক্যাশ ইউটিলিটি
+        </h3>
+
+        <div className="space-y-2">
+          <button 
+            onClick={handleExportData}
+            className="w-full flex items-center justify-center gap-2 py-3 bg-theme-secondary hover:bg-theme-primary-light rounded-2xl text-xs font-bold text-theme-primary transition-all active:scale-95"
+          >
+            সব ডাটা ডাউনলোড (JSON)
+          </button>
+
+          <label className="w-full flex items-center justify-center gap-2 py-3 border-2 border-dashed border-theme-border hover:border-theme-primary rounded-2xl text-xs font-bold text-theme-secondary cursor-pointer transition-all active:scale-95">
+            <span>ডাটা ইম্পোর্ট করুন (JSON)</span>
+            <input type="file" accept=".json" onChange={handleImportData} className="hidden" />
+          </label>
+
+          <button 
+            onClick={handleResetCache}
+            className="w-full flex items-center justify-center gap-2 py-3 bg-red-500/10 hover:bg-red-500/20 text-red-500 rounded-2xl text-xs font-bold transition-all active:scale-95"
+          >
+            <RefreshCw size={14} /> ডাটাবেজ ক্যাশ রিসেট
+          </button>
         </div>
       </div>
-    );
-  };
 
-  // 3. NAMES OF ALLAH
-  const [playingNameId, setPlayingNameId] = useState(null);
-
-  const togglePlayName = (nameId) => {
-    if (playingNameId === nameId) {
-      setPlayingNameId(null);
-    } else {
-      setPlayingNameId(nameId);
-      // Mock playing pronunciation audio
-      alert(`Playing pronunciation audio for name (cached offline audio asset).`);
-      setTimeout(() => setPlayingNameId(null), 2000);
-    }
-  };
-
-  const renderNamesOfAllah = () => {
-    return (
-      <div ref={scrollRef} className="p-4 pb-24 animate-fade-in scroll-mt-2">
-        <button 
-          onClick={() => setActiveView('grid')} 
-          className="flex items-center gap-1.5 text-xs font-semibold text-islamic-600 dark:text-islamic-400 mb-4 bg-slate-100 dark:bg-slate-800 px-3 py-1.5 rounded-full"
-        >
-          <ArrowLeft size={14} /> Back
-        </button>
-
-        <h3 className="text-lg font-bold text-slate-800 dark:text-slate-100 mb-3">Asma-ul-Husna (99 Names of Allah)</h3>
-
-        <div className="grid grid-cols-2 gap-3.5">
-          {namesData.map((name) => (
-            <div 
-              key={name.id} 
-              className="bg-white dark:bg-slate-800 p-4 rounded-3xl border border-slate-100 dark:border-slate-700 shadow-sm flex flex-col items-center justify-between text-center relative group"
-            >
-              <div className="absolute top-2 right-2">
-                <button 
-                  onClick={() => togglePlayName(name.id)}
-                  className="p-1.5 bg-islamic-50 dark:bg-slate-700 text-islamic-600 dark:text-islamic-400 rounded-full"
-                >
-                  {playingNameId === name.id ? <Pause size={10} /> : <Play size={10} />}
-                </button>
-              </div>
-              
-              <div className="w-9 h-9 rounded-full bg-slate-50 dark:bg-slate-900 border border-slate-150 dark:border-slate-700 text-[10px] text-slate-400 flex items-center justify-center font-bold mb-2">
-                {name.id}
-              </div>
-
-              <h4 className="text-2xl font-arabic text-slate-800 dark:text-slate-100 leading-normal mb-1">{name.ar}</h4>
-              <p className="text-xs font-bold text-islamic-600 dark:text-islamic-400">{name.bn_trans}</p>
-              <p className="text-[10px] text-slate-500 dark:text-slate-400 mt-1 font-semibold leading-tight">{name.en}</p>
-              <p className="text-[10px] text-slate-400 dark:text-slate-500 mt-0.5">{name.bn}</p>
-            </div>
-          ))}
-        </div>
+      {/* APP INSTRUCTIONS */}
+      <div className="bg-theme-card p-5 rounded-3xl border border-theme-border shadow-sm space-y-3 text-xs leading-relaxed text-theme-secondary">
+        <h3 className="font-bold text-sm text-theme-text flex items-center gap-2">
+          <BookOpen size={16} className="text-theme-primary" /> app instructions / ব্যবহার নির্দেশিকা
+        </h3>
+        <p>1. <strong>Offline First:</strong> This application calculates all prayer times completely locally. Once loaded, it needs no active network connection.</p>
+        <p>2. <strong>Audio Caching:</strong> Quran translations and recitations are automatically stored in IndexedDB when loaded, letting you replay them while offline.</p>
+        <p>3. <strong>Homescreen Install:</strong> Tap the "Install PWA" button to run this app natively without web browser frames.</p>
       </div>
-    );
-  };
 
-  // 4. ISLAMIC CALENDAR & IMPORTANT DAYS
+    </div>
+  );
+
   const renderCalendar = () => {
-    // Mock countdown days
     const events = [
       { name: 'Ramadan 1448 H', date: 'Feb 8, 2027', daysLeft: 213 },
       { name: 'Eid-ul-Fitr', date: 'Mar 10, 2027', daysLeft: 243 },
@@ -209,25 +183,25 @@ const OtherTab = () => {
     ];
 
     return (
-      <div ref={scrollRef} className="p-4 pb-24 animate-fade-in scroll-mt-2">
+      <div ref={readerRef} className="p-4 pb-24 animate-fade-in scroll-mt-2">
         <button 
           onClick={() => setActiveView('grid')} 
-          className="flex items-center gap-1.5 text-xs font-semibold text-islamic-600 dark:text-islamic-400 mb-4 bg-slate-100 dark:bg-slate-800 px-3 py-1.5 rounded-full"
+          className="flex items-center gap-1.5 text-xs font-semibold text-theme-primary mb-4 bg-theme-secondary px-3 py-1.5 rounded-full"
         >
           <ArrowLeft size={14} /> Back
         </button>
 
-        <h3 className="text-lg font-bold text-slate-800 dark:text-slate-100 mb-4">Important Days</h3>
+        <h3 className="text-lg font-bold text-theme-text mb-4">Important Days</h3>
 
         <div className="space-y-3.5">
           {events.map((evt, idx) => (
-            <div key={idx} className="bg-white dark:bg-slate-800 p-4.5 rounded-2xl border border-slate-100 dark:border-slate-700 shadow-sm flex justify-between items-center">
+            <div key={idx} className="bg-theme-card p-4.5 rounded-2xl border border-theme-border shadow-sm flex justify-between items-center">
               <div>
-                <h4 className="font-bold text-sm text-slate-800 dark:text-slate-100">{evt.name}</h4>
-                <span className="text-[10px] text-slate-400 font-medium">{evt.date}</span>
+                <h4 className="font-bold text-sm text-theme-text">{evt.name}</h4>
+                <span className="text-[10px] text-theme-secondary font-medium">{evt.date}</span>
               </div>
               <div className="text-right">
-                <span className="text-xs font-extrabold text-islamic-600 dark:text-islamic-400 bg-islamic-50 dark:bg-slate-700 px-3 py-1.5 rounded-xl">
+                <span className="text-xs font-extrabold text-theme-primary bg-theme-primary-light px-3 py-1.5 rounded-xl">
                   {evt.daysLeft} days left
                 </span>
               </div>
@@ -238,57 +212,37 @@ const OtherTab = () => {
     );
   };
 
-  // MAIN GRID VIEW
-  const renderGrid = () => {
-    return (
-      <div className="p-4 pb-24 animate-fade-in">
-        <h2 className="text-xl font-bold text-slate-800 dark:text-slate-100 mb-4">Other Tools</h2>
-        <div className="grid grid-cols-2 gap-4">
-          {menuItems.map((item) => {
-            const Icon = item.icon;
-            return (
-              <div 
-                key={item.id} 
-                onClick={() => {
-                  setActiveView(item.id);
-                  setTimeout(() => {
-                    if (scrollRef.current) {
-                      scrollRef.current.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                    }
-                  }, 100);
-                }}
-                className="bg-white dark:bg-slate-800 p-4 rounded-3xl shadow-sm border border-slate-100 dark:border-slate-700/80 flex flex-col items-center justify-center text-center hover:shadow-md cursor-pointer hover:border-islamic-200 dark:hover:border-slate-600 transition-all duration-300 group"
-              >
-                <div className="w-12 h-12 bg-islamic-50 dark:bg-slate-700 text-islamic-600 dark:text-islamic-400 rounded-2xl flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
-                  <Icon size={24} />
-                </div>
-                <h3 className="font-bold text-sm text-slate-800 dark:text-slate-200">{item.title}</h3>
-                <p className="text-[10px] text-slate-400 dark:text-slate-500 mt-1 leading-snug">{item.desc}</p>
-              </div>
-            );
-          })}
-        </div>
+  const renderMosqueLocator = () => (
+    <div ref={readerRef} className="p-4 pb-24 animate-fade-in text-center scroll-mt-2">
+      <button 
+        onClick={() => setActiveView('grid')} 
+        className="flex items-center gap-1.5 text-xs font-semibold text-theme-primary mb-4 bg-theme-secondary px-3 py-1.5 rounded-full"
+      >
+        <ArrowLeft size={14} /> Back
+      </button>
 
-        {/* Sadaqah Jariyah Banner */}
-        <div className="mt-8 bg-gradient-to-br from-islamic-600 to-islamic-800 text-white rounded-3xl p-5 shadow-lg flex items-center justify-between relative overflow-hidden">
-          <div className="absolute -top-10 -right-10 w-24 h-24 bg-white opacity-5 rounded-full blur-xl pointer-events-none"></div>
-          <div>
-            <h3 className="font-bold text-base">Support Muslim Bangla</h3>
-            <p className="text-xs opacity-90 mt-1">Sadaqah Jariyah for app maintenance.</p>
-          </div>
-          <button className="bg-white text-islamic-700 px-4 py-2 rounded-xl text-xs font-bold shadow-sm active:scale-95 transition-transform shrink-0">
-            Donate
-          </button>
-        </div>
+      <div className="bg-theme-card rounded-3xl border border-theme-border p-6 shadow-sm flex flex-col items-center">
+        <Map size={32} className="text-theme-primary mb-3" />
+        <h3 className="font-bold text-base mb-2">Find Nearby Mosques</h3>
+        <p className="text-xs text-theme-secondary max-w-xs mb-6">
+          Search for local mosques using offline mapping or deep-link direction maps.
+        </p>
+
+        <a 
+          href={`https://www.google.com/maps/search/mosque+near+me/@${coordinates.latitude},${coordinates.longitude},15z`}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="w-full py-3 bg-theme-primary hover:bg-theme-primary-hover text-white rounded-2xl text-xs font-bold shadow-md transition-all active:scale-95 flex items-center justify-center gap-1.5"
+        >
+          Open in Google Maps
+        </a>
       </div>
-    );
-  };
+    </div>
+  );
 
   switch (activeView) {
-    case 'qibla': return renderQiblaCompass();
-    case 'mosque': return renderMosqueLocator();
-    case 'names': return renderNamesOfAllah();
     case 'calendar': return renderCalendar();
+    case 'mosque': return renderMosqueLocator();
     default: return renderGrid();
   }
 };
