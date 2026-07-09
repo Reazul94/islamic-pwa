@@ -3,102 +3,339 @@
 @tailwind utilities;
 
 :root {
-  /* Default Light Theme */
+  /* Default Light Mode variables */
   --bg-primary: #ffffff;
   --bg-secondary: #f8fafc;
   --text-primary: #0f172a;
   --text-secondary: #64748b;
   --card-bg: #ffffff;
   --card-border: #f1f5f9;
-  --primary: #059669;
-  --primary-hover: #047857;
-  --primary-light: #ecfdf5;
 }
 
-/* Theme Classes */
-.theme-light {
-  --bg-primary: #ffffff;
-  --bg-secondary: #f8fafc;
-  --text-primary: #0f172a;
-  --text-secondary: #64748b;
-  --card-bg: #ffffff;
-  --card-border: #f1f5f9;
-  --primary: #059669;
-  --primary-hover: #047857;
-  --primary-light: #ecfdf5;
-}
-
-.theme-dark {
-  --bg-primary: #0f172a;
-  --bg-secondary: #020617;
+.dark {
+  /* Default Dark Mode variables */
+  --bg-primary: #0a0f1d;
+  --bg-secondary: #030712;
   --text-primary: #f8fafc;
   --text-secondary: #94a3b8;
-  --card-bg: #1e293b;
-  --card-border: #334155;
+  --card-bg: #111827;
+  --card-border: #1f2937;
+}
+
+/* 25+ COLOR PALETTES DEFINITIONS (Light & Dark Variants) */
+
+/* 1. Emerald (Islamic Green) */
+.theme-emerald {
   --primary: #10b981;
   --primary-hover: #059669;
+  --primary-light: #ecfdf5;
+}
+.dark.theme-emerald {
+  --primary: #34d399;
+  --primary-hover: #10b981;
   --primary-light: #064e3b;
 }
 
-.theme-mint {
-  --bg-primary: #f0fdf4;
-  --bg-secondary: #dcfce7;
-  --text-primary: #14532d;
-  --text-secondary: #166534;
-  --card-bg: #ffffff;
-  --card-border: #bbf7d0;
-  --primary: #15803d;
-  --primary-hover: #166534;
+/* 2. Sapphire */
+.theme-sapphire {
+  --primary: #2563eb;
+  --primary-hover: #1d4ed8;
+  --primary-light: #eff6ff;
+}
+.dark.theme-sapphire {
+  --primary: #60a5fa;
+  --primary-hover: #3b82f6;
+  --primary-light: #172554;
+}
+
+/* 3. Rose */
+.theme-rose {
+  --primary: #e11d48;
+  --primary-hover: #be123c;
+  --primary-light: #fff1f2;
+}
+.dark.theme-rose {
+  --primary: #fb7185;
+  --primary-hover: #f43f5e;
+  --primary-light: #4c0519;
+}
+
+/* 4. Amber */
+.theme-amber {
+  --primary: #d97706;
+  --primary-hover: #b45309;
+  --primary-light: #fef3c7;
+}
+.dark.theme-amber {
+  --primary: #fbbf24;
+  --primary-hover: #f59e0b;
+  --primary-light: #451a03;
+}
+
+/* 5. Violet */
+.theme-violet {
+  --primary: #7c3aed;
+  --primary-hover: #6d28d9;
+  --primary-light: #f5f3ff;
+}
+.dark.theme-violet {
+  --primary: #a78bfa;
+  --primary-hover: #8b5cf6;
+  --primary-light: #2e1065;
+}
+
+/* 6. Cyan */
+.theme-cyan {
+  --primary: #0891b2;
+  --primary-hover: #0e7490;
+  --primary-light: #ecfeff;
+}
+.dark.theme-cyan {
+  --primary: #22d3ee;
+  --primary-hover: #06b6d4;
+  --primary-light: #083344;
+}
+
+/* 7. Fuchsia */
+.theme-fuchsia {
+  --primary: #c084fc;
+  --primary-hover: #a855f7;
+  --primary-light: #faf5ff;
+}
+.dark.theme-fuchsia {
+  --primary: #e879f9;
+  --primary-hover: #d946ef;
+  --primary-light: #4a044e;
+}
+
+/* 8. Lime */
+.theme-lime {
+  --primary: #65a30d;
+  --primary-hover: #4d7c0f;
+  --primary-light: #f7fee7;
+}
+.dark.theme-lime {
+  --primary: #a3e635;
+  --primary-hover: #84cc16;
+  --primary-light: #1a2e05;
+}
+
+/* 9. Orange */
+.theme-orange {
+  --primary: #ea580c;
+  --primary-hover: #c2410c;
+  --primary-light: #fff7ed;
+}
+.dark.theme-orange {
+  --primary: #fb923c;
+  --primary-hover: #f97316;
+  --primary-light: #431407;
+}
+
+/* 10. Teal */
+.theme-teal {
+  --primary: #0d9488;
+  --primary-hover: #0f766e;
+  --primary-light: #f0fdfa;
+}
+.dark.theme-teal {
+  --primary: #2dd4bf;
+  --primary-hover: #14b8a6;
+  --primary-light: #042f2e;
+}
+
+/* 11. Sky */
+.theme-sky {
+  --primary: #0284c7;
+  --primary-hover: #0369a1;
+  --primary-light: #f0f9ff;
+}
+.dark.theme-sky {
+  --primary: #38bdf8;
+  --primary-hover: #0ea5e9;
+  --primary-light: #0c4a6e;
+}
+
+/* 12. Indigo */
+.theme-indigo {
+  --primary: #4f46e5;
+  --primary-hover: #3730a3;
+  --primary-light: #e0e7ff;
+}
+.dark.theme-indigo {
+  --primary: #818cf8;
+  --primary-hover: #6366f1;
+  --primary-light: #1e1b4b;
+}
+
+/* 13. Purple */
+.theme-purple {
+  --primary: #9333ea;
+  --primary-hover: #7e22ce;
+  --primary-light: #faf5ff;
+}
+.dark.theme-purple {
+  --primary: #c084fc;
+  --primary-hover: #a855f7;
+  --primary-light: #3b0764;
+}
+
+/* 14. Pink */
+.theme-pink {
+  --primary: #db2777;
+  --primary-hover: #be185d;
+  --primary-light: #fdf2f8;
+}
+.dark.theme-pink {
+  --primary: #f472b6;
+  --primary-hover: #ec4899;
+  --primary-light: #500724;
+}
+
+/* 15. Slate */
+.theme-slate {
+  --primary: #475569;
+  --primary-hover: #334155;
+  --primary-light: #f1f5f9;
+}
+.dark.theme-slate {
+  --primary: #94a3b8;
+  --primary-hover: #64748b;
+  --primary-light: #1e293b;
+}
+
+/* 16. Zinc */
+.theme-zinc {
+  --primary: #52525b;
+  --primary-hover: #3f3f46;
+  --primary-light: #f4f4f5;
+}
+.dark.theme-zinc {
+  --primary: #a1a1aa;
+  --primary-hover: #71717a;
+  --primary-light: #27272a;
+}
+
+/* 17. Yellow */
+.theme-yellow {
+  --primary: #ca8a04;
+  --primary-hover: #a16207;
+  --primary-light: #fefce8;
+}
+.dark.theme-yellow {
+  --primary: #eab308;
+  --primary-hover: #d97706;
+  --primary-light: #422006;
+}
+
+/* 18. Red */
+.theme-red {
+  --primary: #dc2626;
+  --primary-hover: #b91c1c;
+  --primary-light: #fef2f2;
+}
+.dark.theme-red {
+  --primary: #f87171;
+  --primary-hover: #ef4444;
+  --primary-light: #450a0a;
+}
+
+/* 19. Green */
+.theme-green {
+  --primary: #16a34a;
+  --primary-hover: #15803d;
   --primary-light: #f0fdf4;
 }
-
-.theme-solarized {
-  --bg-primary: #fdf6e3;
-  --bg-secondary: #eee8d5;
-  --text-primary: #073642;
-  --text-secondary: #586e75;
-  --card-bg: #fdf6e3;
-  --card-border: #93a1a1;
-  --primary: #b58900;
-  --primary-hover: #cb4b16;
-  --primary-light: #eee8d5;
+.dark.theme-green {
+  --primary: #4ade80;
+  --primary-hover: #22c55e;
+  --primary-light: #062f14;
 }
 
-.theme-dracula {
-  --bg-primary: #282a36;
-  --bg-secondary: #1e1f29;
-  --text-primary: #f8f8f2;
-  --text-secondary: #6272a4;
-  --card-bg: #44475a;
-  --card-border: #6272a4;
+/* 20. Blue */
+.theme-blue {
+  --primary: #2563eb;
+  --primary-hover: #1d4ed8;
+  --primary-light: #eff6ff;
+}
+.dark.theme-blue {
+  --primary: #3b82f6;
+  --primary-hover: #2563eb;
+  --primary-light: #172554;
+}
+
+/* 21. Crimson */
+.theme-crimson {
+  --primary: #9f1239;
+  --primary-hover: #881337;
+  --primary-light: #fff1f2;
+}
+.dark.theme-crimson {
+  --primary: #fb7185;
+  --primary-hover: #f43f5e;
+  --primary-light: #4c0519;
+}
+
+/* 22. Gold */
+.theme-gold {
+  --primary: #b58900;
+  --primary-hover: #856404;
+  --primary-light: #fffdf5;
+}
+.dark.theme-gold {
+  --primary: #d4af37;
+  --primary-hover: #aa8c2c;
+  --primary-light: #2d2200;
+}
+
+/* 23. Olive */
+.theme-olive {
+  --primary: #808000;
+  --primary-hover: #555500;
+  --primary-light: #fffff0;
+}
+.dark.theme-olive {
+  --primary: #a3c26b;
+  --primary-hover: #8bab42;
+  --primary-light: #1f270a;
+}
+
+/* 24. Lavender */
+.theme-lavender {
+  --primary: #7b68ee;
+  --primary-hover: #6a5acd;
+  --primary-light: #f3f0ff;
+}
+.dark.theme-lavender {
+  --primary: #b0c4de;
+  --primary-hover: #4682b4;
+  --primary-light: #191970;
+}
+
+/* 25. Sky Teal */
+.theme-sky-teal {
+  --primary: #0ea5e9;
+  --primary-hover: #0d9488;
+  --primary-light: #f0fdfa;
+}
+.dark.theme-sky-teal {
+  --primary: #2dd4bf;
+  --primary-hover: #38bdf8;
+  --primary-light: #0c4a6e;
+}
+
+/* 26. Dracula Purple */
+.theme-dracula-purple {
   --primary: #bd93f9;
   --primary-hover: #ff79c6;
+  --primary-light: #282a36;
+}
+.dark.theme-dracula-purple {
+  --primary: #ff79c6;
+  --primary-hover: #bd93f9;
   --primary-light: #1e1f29;
 }
 
-.theme-onedark {
-  --bg-primary: #282c34;
-  --bg-secondary: #21252b;
-  --text-primary: #abb2bf;
-  --text-secondary: #5c6370;
-  --card-bg: #21252b;
-  --card-border: #3e4452;
-  --primary: #98c379;
-  --primary-hover: #61afef;
-  --primary-light: #282c34;
-}
-
-.theme-nord {
-  --bg-primary: #2e3440;
-  --bg-secondary: #242933;
-  --text-primary: #d8dee9;
-  --text-secondary: #4c566a;
-  --card-bg: #3b4252;
-  --card-border: #4c566a;
-  --primary: #88c0d0;
-  --primary-hover: #81a1c1;
-  --primary-light: #2e3440;
-}
 
 @layer base {
   body {
@@ -108,7 +345,7 @@
   }
 }
 
-/* Global utility bindings to use variables dynamically */
+/* Global utility variables classes */
 .bg-theme-bg { background-color: var(--bg-primary); }
 .bg-theme-secondary { background-color: var(--bg-secondary); }
 .text-theme-text { color: var(--text-primary); }

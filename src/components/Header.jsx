@@ -7,7 +7,7 @@ import { getPrayerTimesForDate } from '../utils/prayerCalculator';
 import { getBengaliDate, getHijriDate } from '../utils/dateConverter';
 
 const Header = () => {
-  const { theme, setTheme } = useThemeStore();
+  const { theme, mode, setTheme, toggleTheme } = useThemeStore();
   const { madhhab, language, coordinates, locationName, setMadhhab, setLanguage, setCoordinates } = useSettingsStore();
   const [currentDate, setCurrentDate] = useState(new Date());
   const [showSettings, setShowSettings] = useState(false);
@@ -16,7 +16,7 @@ const Header = () => {
   const [timeRemaining, setTimeRemaining] = useState('');
   const [nextPrayerName, setNextPrayerName] = useState('');
 
-  // 1. RUNNING MARQUEE ISLAMIC ADVICE (Daily auto-update)
+  // Running marquee daily auto-update advice
   const advices = [
     "রাসূলুল্লাহ (সা.) বলেছেন: 'নিশ্চয়ই দ্বীন সহজ।' (সহীহ বুখারী)",
     "পবিত্র কুরআনে বলা হয়েছে: 'নিশ্চয়ই আল্লাহর সাহায্য অতি নিকটে।' (সূরা আল-বাকারাহ: ২১৪)",
@@ -32,72 +32,7 @@ const Header = () => {
     return advices[day % advices.length];
   };
 
-  // 2. DAILY QURANIC VERSE & HADITH REFLECTION (Updates 2 times daily: AM/PM)
-  const reflections = [
-    {
-      verse: {
-        ar: "وَإِذَا سَأَلَكَ عِبَادِي عَنِّي فَإِنِّي قَرِيبٌ",
-        en: "And when My servants ask you concerning Me, indeed I am near.",
-        bn: "আর যখন আমার বান্দাগণ আমার সম্পর্কে আপনাকে জিজ্ঞেস করে, তখন বলুন যে আমি তাদের নিকটেই আছি।"
-      },
-      hadith: {
-        ar: "الدُّعَاءُ هُوَ الْعِبَادَةُ",
-        en: "Supplication (Dua) is indeed the worship itself.",
-        bn: "দোয়া হলো ইবাদতের মূল ভিত্তি।"
-      }
-    },
-    {
-      verse: {
-        ar: "إِنَّ مَعَ الْعُسْرِ يُسْرًا",
-        en: "Indeed, with hardship [will be] ease.",
-        bn: "নিশ্চয়ই কষ্টের সাথে স্বস্তি রয়েছে।"
-      },
-      hadith: {
-        ar: "لاَ تَغْضَبْ",
-        en: "Do not become angry.",
-        bn: "ক্রোধ বা রাগ পরিহার করো।"
-      }
-    },
-    {
-      verse: {
-        ar: "وَقُولُوا لِلنَّاسِ حُسْنًا",
-        en: "And speak to people good words.",
-        bn: "মানুষের সাথে ভালো ও সুন্দরভাবে কথা বলো।"
-      },
-      hadith: {
-        ar: "الْكَلِمَةُ الطَّيِّبَةُ صَدَقَةٌ",
-        en: "A good word is a charity.",
-        bn: "উত্তম কথা বলা একটি সদকাহ।"
-      }
-    },
-    {
-      verse: {
-        ar: "يَا أَيُّهَا الَّذِينَ آمَنُوا اسْتَعِينُوا بِالصَّبْرِ وَالصَّلَاةِ",
-        en: "O you who have believed, seek help through patience and prayer.",
-        bn: "হে ঈমানদারগণ! তোমরা ধৈর্য ও সালাতের মাধ্যমে সাহায্য প্রার্থনা করো।"
-      },
-      hadith: {
-        ar: "تَبَسُّمُكَ فِي وَجْهِ أَخِيكَ لَكَ صَدَقَةٌ",
-        en: "Your smiling in the face of your brother is charity for you.",
-        bn: "তোমার ভাইয়ের প্রতি মুচকি হাসি দেওয়াও একটি সদকাহ।"
-      }
-    }
-  ];
-
-  const getDailyReflection = () => {
-    const dayOfYear = Math.floor((currentDate - new Date(currentDate.getFullYear(), 0, 0)) / 86400000);
-    const hour = currentDate.getHours();
-    const period = hour >= 5 && hour < 17 ? 'AM' : 'PM';
-    const index = (dayOfYear + (period === 'PM' ? 2 : 0)) % reflections.length;
-    return {
-      period: period === 'AM' ? 'Morning Reflection / সকালের আমল' : 'Evening Reflection / সন্ধ্যার আমল',
-      ...reflections[index]
-    };
-  };
-
-  const currentReflection = getDailyReflection();
-
-  // Location list
+  // Location suggestions database
   const locationsDb = [
     { name: 'Dhaka, Bangladesh', lat: 23.8103, lng: 90.4125 },
     { name: 'Chittagong, Bangladesh', lat: 22.3569, lng: 91.7832 },
@@ -108,14 +43,34 @@ const Header = () => {
     { name: 'New York, USA', lat: 40.7128, lng: -74.0060 }
   ];
 
+  // 25+ Tailwind Color Palettes Theme Options
   const themesList = [
-    { id: 'light', name: 'Light Theme' },
-    { id: 'dark', name: 'Dark Theme' },
-    { id: 'mint', name: 'Mint Theme' },
-    { id: 'solarized', name: 'Solarized' },
-    { id: 'dracula', name: 'Dracula' },
-    { id: 'onedark', name: 'One Dark' },
-    { id: 'nord', name: 'Nord Theme' }
+    { id: 'emerald', name: 'Emerald (Green)' },
+    { id: 'sapphire', name: 'Sapphire (Blue)' },
+    { id: 'rose', name: 'Rose (Red)' },
+    { id: 'amber', name: 'Amber (Gold)' },
+    { id: 'violet', name: 'Violet (Purple)' },
+    { id: 'cyan', name: 'Cyan' },
+    { id: 'fuchsia', name: 'Fuchsia' },
+    { id: 'lime', name: 'Lime' },
+    { id: 'orange', name: 'Orange' },
+    { id: 'teal', name: 'Teal' },
+    { id: 'sky', name: 'Sky' },
+    { id: 'indigo', name: 'Indigo' },
+    { id: 'purple', name: 'Purple' },
+    { id: 'pink', name: 'Pink' },
+    { id: 'slate', name: 'Slate' },
+    { id: 'zinc', name: 'Zinc' },
+    { id: 'yellow', name: 'Yellow' },
+    { id: 'red', name: 'Red' },
+    { id: 'green', name: 'Green' },
+    { id: 'blue', name: 'Blue' },
+    { id: 'crimson', name: 'Crimson' },
+    { id: 'gold', name: 'Gold' },
+    { id: 'olive', name: 'Olive' },
+    { id: 'lavender', name: 'Lavender' },
+    { id: 'sky-teal', name: 'Sky Teal' },
+    { id: 'dracula-purple', name: 'Dracula Purple' }
   ];
 
   useEffect(() => {
@@ -197,7 +152,7 @@ const Header = () => {
 
   return (
     <div className="flex flex-col w-full">
-      {/* 1. RUNNING MARQUEE AT TOP OF HEADER */}
+      {/* RUNNING MARQUEE AT TOP OF HEADER */}
       <div className="bg-black/35 py-1 px-4 text-xs font-semibold text-white block w-full overflow-hidden select-none">
         <marquee scrollamount="4" className="block w-full outline-none">
           {getDailyAdvice()}
@@ -226,6 +181,12 @@ const Header = () => {
             >
               <Settings size={18} />
             </button>
+            <button 
+              onClick={toggleTheme} 
+              className="p-2 bg-white/10 hover:bg-white/20 rounded-full transition-all active:scale-95"
+            >
+              {mode === 'dark' ? <Sun size={18} /> : <Moon size={18} />}
+            </button>
           </div>
         </div>
 
@@ -252,7 +213,7 @@ const Header = () => {
 
               <div>
                 <span className="text-[10px] text-white/70 block mb-1 font-bold flex items-center gap-1">
-                  <Palette size={10} /> APPEARANCE
+                  <Palette size={10} /> APPEARANCE (25+ Colors)
                 </span>
                 <select 
                   value={theme} 
@@ -368,34 +329,6 @@ const Header = () => {
               <span className="text-yellow-300">Dhuhr {prayerTimes ? format(prayerTimes.dhuhr, 'hh:mm a') : '12:05 PM'}</span>
               <span>Maghrib {prayerTimes ? format(prayerTimes.maghrib, 'hh:mm a') : '06:45 PM'}</span>
             </div>
-          </div>
-        </div>
-
-        {/* 2. DAILY REFLECTION WIDGET CARD (Quran & Hadith AM/PM) */}
-        <div className="mt-5 bg-black/15 backdrop-blur-md rounded-3xl p-5 border border-white/10 z-10 relative space-y-4">
-          <div className="flex justify-between items-center border-b border-white/10 pb-2">
-            <span className="text-[9px] uppercase tracking-wider font-extrabold text-yellow-300">{currentReflection.period}</span>
-            <span className="text-[9px] text-white/60">Updated twice daily</span>
-          </div>
-
-          {/* Daily Quran Verse */}
-          <div className="space-y-1.5">
-            <span className="text-[8px] uppercase tracking-widest font-extrabold text-white/50 block">Quranic Verse / আয়াত</span>
-            <p className="text-right text-base font-arabic leading-relaxed text-white">{currentReflection.verse.ar}</p>
-            <p className="text-[10px] text-white/80 leading-relaxed italic">
-              "{language === 'bn' ? currentReflection.verse.bn : currentReflection.verse.en}"
-            </p>
-          </div>
-
-          <hr className="border-white/10" />
-
-          {/* Daily Hadith Reflection */}
-          <div className="space-y-1.5">
-            <span className="text-[8px] uppercase tracking-widest font-extrabold text-white/50 block">Hadith / হাদিস</span>
-            <p className="text-right text-base font-arabic leading-relaxed text-white">{currentReflection.hadith.ar}</p>
-            <p className="text-[10px] text-white/80 leading-relaxed italic">
-              "{language === 'bn' ? currentReflection.hadith.bn : currentReflection.hadith.en}"
-            </p>
           </div>
         </div>
 

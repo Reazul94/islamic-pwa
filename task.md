@@ -1,7 +1,11 @@
-- `[x]` Refactor layouts and update components
-  - `[x]` Update `App.jsx` to render all tabs vertically on one page with scroll observers
-  - `[x]` Update `BottomNav.jsx` to scroll on click
-  - `[x]` Update `Header.jsx` with Dhuhr start time on sun curve and 5 Madhhabs
-  - `[x]` Update `IlmTab.jsx` with Quran/Hadith API, Dexie offline caching, and reciter selection audio player
-  - `[x]` Implement auto-scroll to details on grid click across tabs
+- `[x]` Routing, Paging, and Theme Updates
+  - `[x]` Configure `HashRouter` in `main.jsx` and define routes in `App.jsx`
+  - `[x]` Create standalone pages/views for Quran, Hadith, Duas, etc.
+  - `[x]` Implement A'uzubillah + Bismillah audio play sequence in Quran reader
+  - `[x]` Implement Hadith chapter list grouping and auto-scroll to chapters
+  - `[x]` Implement Dua category cards layout
+  - `[x]` Update `index.css` with 7 themes (Light, Dark, Mint, Solarized, Dracula, One Dark, Nord) and add theme selector
+  - `[x]` Add top scrolling advice marquee, daily reflections (AM/PM), and language selector
+  - `[x]` Add PWA installation helper and database export/import/reset utility card
+  - `[x]` Add footer with Reazul copyright and app instructions
   - `[x]` Verify local build and deploy to GitHub Pages
